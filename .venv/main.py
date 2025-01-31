@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from PIL import Image, ImageTk  # Импортируем необходимые модули Pillow
 import psycopg2
-
+ggg
 # Подключение к базе данных PostgreSQL
 def connect_to_db():
     try:
