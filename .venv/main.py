@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
+from PIL import Image, ImageTk  # Импортируем необходимые модули Pillow
 import psycopg2
 
 # Подключение к базе данных PostgreSQL
@@ -213,7 +214,7 @@ class App(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Работа с базой данных PostgreSQL")
-        self.geometry("800x600")
+        self.geometry("1000x600")
 
         self.conn = connect_to_db()
         if not self.conn:
@@ -246,6 +247,9 @@ class App(tk.Tk):
 
         self.current_tree = None  # Добавляем переменную для хранения текущего Treeview
         self.current_table_name = None  # Добавляем переменную для хранения текущей таблицы
+
+        # Добавляем изображение в главное окно
+        self.add_image()
 
     def create_tabs(self):
         tables = get_tables(self.conn)
@@ -434,7 +438,21 @@ class App(tk.Tk):
 
         tree.pack(fill=tk.BOTH, expand=True)
 
+    def add_image(self):
+        # Загружаем изображение с помощью PIL
+        image_path = "C:/Users/Andrey/PycharmProjects/practicee/.venv/img.jpg"  # Здесь замените на ваш путь к изображению
+        try:
+            img = Image.open(image_path)
+            img = img.resize((100, 100))  # Изменяем размер изображения по необходимости
+            photo = ImageTk.PhotoImage(img)
+
+            # Создаем метку для отображения изображения
+            self.image_label = tk.Label(self, image=photo)
+            self.image_label.image = photo  # Сохраняем ссылку на изображение, чтобы оно не было удалено сборщиком мусора
+            self.image_label.pack(side=tk.RIGHT, padx=10, pady=10)
+        except Exception as e:
+            messagebox.showerror("Ошибка загрузки изображения", f"Не удалось загрузить изображение: {e}")
+
 if __name__ == "__main__":
     app = App()
     app.mainloop()
-    цувргац3уарпг9цупрагщ8шцрпам
